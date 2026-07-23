@@ -138,8 +138,8 @@ protected:
         painter.drawEllipse(p2, 6, 6);
 
         painter.setPen(Qt::black);
-        painter.drawText(p1 + QPointF(10, -10), QString("A (x= %1)").arg(x1, 0, 'f', 2));
-        painter.drawText(p2 + QPointF(10, -10), QString("B (x= %2)").arg(x2, 0, 'f', 2));
+        painter.drawText(p1 + QPointF(10, -10), QString("A (x,y) = (%1, %2)").arg(x1, 0, 'f', 2).arg(y1, 0, 'f', 2));
+        painter.drawText(p2 + QPointF(10, -10), QString("B (x,y) = (%1, %2)").arg(x2, 0, 'f', 2).arg(y2, 0, 'f', 2));
     }
 
     void mousePressEvent(QMouseEvent *event) override {
