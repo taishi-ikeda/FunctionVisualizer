@@ -120,10 +120,9 @@ protected:
         double y2 = f(x2);
 
         painter.setPen(QPen(Qt::darkGreen, 1, Qt::DashLine));
+        double m = (y2 - y1) / (x2 - x1);
+        double c = y1 - m * x1;
         if (std::abs(x1 - x2) > 1e-5) {
-            double m = (y2 - y1) / (x2 - x1);
-            double c = y1 - m * x1;
-
             double xLeft = toMathX(0);
             double xRight = toMathX(width());
             painter.drawLine(toPixel(xLeft, m * xLeft + c), toPixel(xRight, m * xRight + c));
@@ -140,6 +139,12 @@ protected:
         painter.setPen(Qt::black);
         painter.drawText(p1 + QPointF(10, -10), QString("A (x,y) = (%1, %2)").arg(x1, 0, 'f', 2).arg(y1, 0, 'f', 2));
         painter.drawText(p2 + QPointF(10, -10), QString("B (x,y) = (%1, %2)").arg(x2, 0, 'f', 2).arg(y2, 0, 'f', 2));
+        painter.drawText(10, 20, QString("f(x) = %1").arg(QString::fromStdString(parser_.GetExpr())));
+        if(c>=0) {
+            painter.drawText(10, 35, QString("y=%1*x+%2").arg(m, 0, 'f', 2).arg(c, 0, 'f', 2));
+        } else {
+            painter.drawText(10, 35, QString("y=%1*x%2").arg(m, 0, 'f', 2).arg(c, 0, 'f', 2));
+        }
     }
 
     void mousePressEvent(QMouseEvent *event) override {
